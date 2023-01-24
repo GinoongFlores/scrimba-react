@@ -20,8 +20,8 @@ body {
 
 .card {
 	background: #1a1b21;
-	width: 500px;
-	margin: 50px 0;
+	width: 100%;
+	margin: 0;
 }
 
 .infos {
@@ -29,9 +29,9 @@ body {
 }
 
 .info--img {
-	width: 500px;
-	height: 500px;
-	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 450px;
+	border-radius: 3px 3px 0px 0px;
 }
 
 .info--name {
@@ -65,8 +65,8 @@ body {
 
 .info--email_btn,
 .info--linkedin_btn {
-	width: 115px;
-	height: 34px;
+	width: 6rem;
+	height: 2.1rem;
 
 	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
 	border-radius: 6px;
@@ -101,6 +101,11 @@ body {
 
 .about--container {
 	margin-bottom: 27px;
+}
+
+.about--title,
+.interests--title {
+	font-size: 1.3rem;
 }
 
 .about--content,
