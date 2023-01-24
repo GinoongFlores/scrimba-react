@@ -122,10 +122,89 @@ body {
 
 .footer--img_lists > li {
 	list-style: none;
-	padding: 19px 24px;
+	padding: 1rem 1rem;
 }
 
 .footer--img_lists img {
-	width: 30px;
-	height: 30px;
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+/* Media queries */
+
+@media screen and (min-width: 530px) {
+	.card {
+		width: 500px;
+		margin: 50px 0;
+	}
+
+	.info--img {
+		width: 500px;
+		height: 500px;
+		border-radius: 10px 10px 0px 0px;
+	}
+
+	.info--name {
+		margin-top: 21px;
+
+		font-size: 25px;
+		line-height: 30px;
+	}
+
+	.info--title {
+		font-size: 12.8px;
+		line-height: 15px;
+
+		margin: 6px 0 8px 0;
+	}
+
+	.info--website {
+		margin: 8px 0 15px 0;
+	}
+
+	.info--buttons_container {
+		gap: 16px;
+	}
+
+	.info--email_btn,
+	.info--linkedin_btn {
+		width: 115px;
+		height: 34px;
+
+		gap: 8px;
+	}
+
+	.info--linkedin_icon,
+	.info--email_icon {
+		width: 16px;
+		height: 16px;
+	}
+
+	.about_interest--container {
+		padding: 0 40px;
+		margin: 35px 0 25px 0;
+	}
+
+	.about--container {
+		margin-bottom: 27px;
+	}
+
+	.about--content,
+	.interests--content {
+		margin-top: 5px;
+	}
+
+	.footer--img_lists {
+		padding: 0;
+		margin: 0;
+	}
+
+	.footer--img_lists > li {
+		padding: 19px 24px;
+	}
+
+	.footer--img_lists img {
+		width: 30px;
+		height: 30px;
+	}
 }
