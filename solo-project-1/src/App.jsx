@@ -7,11 +7,15 @@ import Footer from "./components/Footer"
 export default function App() {
     return (
         <>
-            <div className="container">
-                <Info />
-                <About />
-                <Interests />
-                <Footer />
+            <div className="main">
+                <div className="card">
+                    <Info />
+                    <div className="about_interest--container">
+                        <About />
+                        <Interests />
+                    </div>
+                    <Footer />
+                </div>
             </div>
         </>
     )
