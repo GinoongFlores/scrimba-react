@@ -8,6 +8,15 @@ body {
 	font-family: "Poppins";
 }
 
+/* generic styles & colors */
+.bold {
+	font-weight: bold;
+}
+
+.gray {
+	color: #918e9b;
+}
+
 nav {
 	height: 70px;
 	padding: 20px 36px;
