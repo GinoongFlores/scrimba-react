@@ -55,3 +55,24 @@ section {
 .hero--description p {
 	margin-top: 0;
 }
+
+/* Card */
+
+.card--image {
+	width: 100%;
+	border-radius: 9px;
+}
+
+.card--container {
+	width: 175px;
+	font-size: 12px;
+}
+
+.star--container {
+	display: flex;
+	align-items: center;
+}
+
+.star--image {
+	height: 14px;
+}
