@@ -17,6 +17,10 @@ body {
 	color: #918e9b;
 }
 
+section {
+	padding: 20px;
+}
+
 nav {
 	height: 70px;
 	padding: 20px 36px;
@@ -32,10 +36,6 @@ nav {
 }
 
 /* Hero */
-
-section {
-	padding: 20px;
-}
 
 .hero--container {
 	display: flex;
@@ -58,21 +58,33 @@ section {
 
 /* Card */
 
-.card--image {
-	width: 100%;
-	border-radius: 9px;
-}
-
 .card--container {
 	width: 175px;
 	font-size: 12px;
+
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
 }
 
-.star--container {
+.cards-lists {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 20px;
+	overflow-x: auto;
+}
+
+.card--image {
+	width: 100%;
+	border-radius: 9px;
+	margin-bottom: 9px;
+}
+
+.card--stats {
 	display: flex;
 	align-items: center;
 }
 
-.star--image {
+.card--star {
 	height: 14px;
 }
