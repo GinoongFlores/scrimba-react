@@ -9,41 +9,20 @@ import data from "./data";
 // console.log(data);
 
 function App() {
-	// explain: We map over the data an array of objects and for each item in the array we return a Card component with the props that we want to pass. We then store the result of this in a variable called cardData. We then return the cardData variable which is an array of Card components.
-	const cardData = data.map((card) => {
-		// explain: We destructure the card object and store the values in variables. We then pass these variables as props to the Card component.
-		const {
-			id,
-			coverImg,
-			stats: { rating, reviewCount },
-			location,
-			title,
-			price,
-		} = card;
+	// the item variable is an instance of the data array of objects and we are mapping over it to get the values that we need from each object.
+	const cardData = data.map((item) => {
 		return (
 			<Card
-				key={id}
-				img={coverImg}
-				rating={rating}
-				reviewCount={reviewCount}
-				location={location}
-				title={title}
-				price={price}
+				key={item.id}
+				// here we are passing the entire item object as a prop to the Card component and then we call the values that we need by Ex. (props.item.id)
+				item={item}
 			/>
 		);
 	});
 	return (
 		<div className="App">
 			<Navbar />
-			{/* <Hero /> */}
-			{/* <Card
-				img={"katie-zaferes.png"}
-				rating={"5.0"}
-				reviewCount={6}
-				country={"USA"}
-				title={"Life lessons with Katie Zaferes"}
-				price={136}
-			/> */}
+			<Hero />
 			<section className="cards-lists">{cardData}</section>
 		</div>
 	);
