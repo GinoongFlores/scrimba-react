@@ -5,31 +5,32 @@ const Card = (props) => {
 	return (
 		<>
 			<div className="card">
-				<img
-					src={`src/assets/img/${props.imgCountry}`}
-					alt={`${props.altCountry}`}
-					className="img-country"
-				/>
+				<div className="img-div">
+					<img
+						src={`/img/${props.item.imgCountry}`}
+						alt={`${props.item.altCountry}`}
+						className="img-country"
+					/>
+				</div>
 				<div className="card--details">
 					<div className="card--country-view">
 						<p>
-							<img src="src/assets/location.svg" alt="location" />
-							<span className="country">{props.country}</span>{" "}
+							<img src="/img/location.svg" alt="location" />
+							<span className="country">{props.item.country}</span>{" "}
 						</p>
 						<p>
-							<a className="maps" href={`${props.googleMapsUrl}`}>
+							<a className="maps" href={`${props.item.googleMapsUrl}`}>
 								View on Google Maps
 							</a>
 						</p>
 					</div>
-					<h2 className="landmark">{props.landmark}</h2>
-
+					<h2 className="landmark">{props.item.landmark}</h2>
 					<p className="dates">
 						<span className="bold">
-							{props.startDate} - {props.endDate}
+							{props.item.startDate} - {props.item.endDate}
 						</span>
 					</p>
-					<p>{props.description}</p>
+					<p>{props.item.description}</p>
 				</div>
 			</div>
 		</>

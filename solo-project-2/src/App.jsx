@@ -5,13 +5,12 @@ import "./index.css";
 
 function App() {
 	const countryCard = CountryData.map((country) => {
-		return <Card key={country.id} {...country} />;
+		return <Card key={country.id} item={country} />;
 	});
 	return (
 		<>
 			<div>
 				<Navbar />
-
 				<div className="card-wrapper">
 					<h2>Using Map</h2>
 					{countryCard}
