@@ -20,11 +20,11 @@ function App() {
 		);
 	});
 	return (
-		<div className="App">
+		<>
 			<Navbar />
 			<Hero />
 			<section className="cards-lists">{cardData}</section>
-		</div>
+		</>
 	);
 }
 

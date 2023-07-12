@@ -1,0 +1,83 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Poppins";
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.country {
+	font-weight: 500;
+}
+
+.navbar-bd {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+
+	background-color: #f55a5a;
+	color: white;
+	text-align: center;
+	padding: 20px;
+}
+
+/* Card */
+
+.card-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	/* margin-top: 28px; */
+	gap: 16px;
+}
+
+.card {
+	display: flex;
+	gap: 16px;
+
+	width: 600px;
+}
+
+.img-country {
+	width: auto;
+	height: 180px;
+	border-radius: 5px;
+	object-fit: cover;
+}
+
+.card--details p {
+	font-size: 12px;
+}
+
+.card--details .maps {
+	text-decoration: underline;
+	color: #918e9b;
+	cursor: pointer;
+}
+
+.card--details .landmark {
+	padding-bottom: 12px;
+}
+
+.card--details .dates {
+	margin-bottom: 8px;
+}
+
+.card--country-view {
+	display: flex;
+	gap: 16px;
+}
+
+.card--country-view .country {
+	padding-left: 4px;
+	letter-spacing: 2px;
+}
