@@ -20,27 +20,32 @@ body {
 /* header */
 header {
 	display: flex;
-	justify-content: space-around;
 	align-items: center;
+	height: 65px;
+	/* this decrease the size of the image header */
+	padding: 20px;
 
 	color: white;
 	background-image: var(--bd);
 }
 
-.meme-side {
-	display: flex;
-	align-items: center;
-	gap: 6px;
+.header--image {
+	height: 100%;
+	margin-right: 6px;
 }
 
-.troll-face {
-	width: 100%;
-	max-width: 31px;
-	height: 26px;
+.header--title {
+	font-size: 1.25rem;
+	/* add a right margin based on the remaining space */
+	margin-right: auto;
+}
+
+.header--image {
+	font-size: 1rem;
+	font-weight: 500;
 }
 
 /* form */
-
 .meme {
 	display: flex;
 	flex-direction: column;
@@ -68,7 +73,6 @@ form {
 	border: none;
 	cursor: pointer;
 	align-self: center;
-	/* justify-self: center; */
 }
 
 form input[type="text"] {
