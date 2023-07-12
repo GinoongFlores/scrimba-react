@@ -1,6 +1,6 @@
 import React from "react";
 import "../style.css";
-import CardStar from "../assets/img/star.png";
+import CardStar from "/img/star.png";
 
 const Card = (props) => {
 	console.log(props);
@@ -20,7 +20,7 @@ const Card = (props) => {
 			is inserted into a string or literal
 			 */}
 			<img
-				src={`../src/assets/img/${props.item.coverImg}`}
+				src={`img/${props.item.coverImg}`}
 				alt="katie zaferes"
 				className="card--image"
 			/>

@@ -6,7 +6,7 @@ const Hero = () => {
 	return (
 		<section className="hero--container">
 			<img
-				src={"../src/assets/img/photo-grid.png"}
+				src={"img/photo-grid.png"}
 				className="hero--image"
 				alt="hero-image"
 			/>
