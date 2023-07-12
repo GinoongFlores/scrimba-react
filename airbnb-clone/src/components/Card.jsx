@@ -20,7 +20,7 @@ const Card = (props) => {
 			is inserted into a string or literal
 			 */}
 			<img
-				src={`src/assets/img/${props.item.coverImg}`}
+				src={`../src/assets/img/${props.item.coverImg}`}
 				alt="katie zaferes"
 				className="card--image"
 			/>
