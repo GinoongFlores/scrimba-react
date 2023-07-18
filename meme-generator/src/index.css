@@ -54,13 +54,13 @@ header {
 .form {
 	display: grid;
 	/* 2 rows / 2 columns by 1 fraction */
-	grid-template: 40px 40px / 1fr 1fr;
+	grid-template: repeat(2, 40px) / repeat(2, 1fr);
 	gap: 17px;
 }
 
 .form--button {
 	/* grid start on row 1 and ends on row -1 */
-	grid-column: 1 / -1;
+	grid-column: 1 / span 2;
 	border-radius: 5px;
 	font-size: 1rem;
 
@@ -79,6 +79,7 @@ header {
 .meme-img {
 	width: 100%;
 	max-width: 427px;
-	align-self: center;
+	justify-self: center;
+	grid-column: span 2;
 	border-radius: 2px;
 }
