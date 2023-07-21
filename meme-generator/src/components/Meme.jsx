@@ -1,11 +1,18 @@
 import "../index.css";
-import React from "react";
 import memesData from "../memesData";
+import { useState } from "react";
 
 // console.log(memesData);
 
 const Meme = () => {
-	const [memeImg, setMemeImg] = React.useState("");
+	// const [memeImg, setMemeImg] = useState("http://i.imgflip.com/1bij.jpg");
+	const [meme, setMeme] = useState({
+		topText: "",
+		bottomText: "",
+		randomImage: "http://i.imgflip.com/1bij.jpg",
+	});
+
+	const [allMemeImages, setAllMemeImages] = useState(memesData);
 
 	// Inline way to do it
 	// const randomeMemeImg =
@@ -14,15 +21,15 @@ const Meme = () => {
 	// 	].url;
 
 	// Another way to do it to make it more readable
-	const memesArray = memesData.data.memes; // array of memes
-	const randomNumber = Math.floor(Math.random() * memesArray.length) + 1; // random number between 1 and 100
+	const memesArray = allMemeImages.data.memes; // array of memes
+	const randomNumber = Math.floor(Math.random() * memesArray.length); // random number between 1 and 100
 	let url = memesArray[randomNumber].url; // url of the meme at the random position
 
 	function getMemeImg() {
-		// we can decide not to use a callback function here because we will not be using the previous state of the `memeImg` state which is the empty string.
-		setMemeImg(url);
-
-		console.log(memeImg);
+		setMeme((prevState) => ({
+			...prevState,
+			randomImage: url,
+		}));
 	}
 
 	return (
@@ -33,7 +40,7 @@ const Meme = () => {
 				<button type="button" onClick={getMemeImg} className="form--button">
 					Get a new meme image 🖼
 				</button>
-				<img src={memeImg} alt="image meme" className="meme-img" />
+				<img src={meme.randomImage} alt="image meme" className="meme-img" />
 			</form>
 		</main>
 	);
