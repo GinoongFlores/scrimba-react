@@ -20,7 +20,13 @@ function App() {
 	}
 
 	const squareElements = squares.map((square) => (
-		<Box key={square.id} id={square.id} on={square.on} handleClick={toggle} />
+		<Box
+			// passing props to the Box component from the App component
+			key={square.id}
+			on={square.on}
+			// this is called closure where each of the box has the function toggle function with it's own id.
+			handleClick={() => toggle(square.id)}
+		/>
 	));
 
 	return <>{squareElements}</>;
