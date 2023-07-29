@@ -1,44 +1,38 @@
 import "../index.css";
-import memesData from "../memesData";
-import { useState } from "react";
-
-// console.log(memesData);
+// import memesData from "../memesData"; no need to import this as we are fetching the data from the api
+import { useEffect, useState } from "react";
 
 const Meme = () => {
-	// const [memeImg, setMemeImg] = useState("http://i.imgflip.com/1bij.jpg");
 	const [meme, setMeme] = useState({
 		topText: "",
 		bottomText: "",
 		randomImage: "http://i.imgflip.com/1bij.jpg",
 	});
 
-	const [allMemeImages, setAllMemeImages] = useState(memesData);
-
-	// Inline way to do it
-	// const randomeMemeImg =
-	// 	memesData.data.memes[
-	// 		Math.floor(Math.random() * memesData.data.memes.length)
-	// 	].url;
-
-	// Another way to do it to make it more readable
-	const memesArray = allMemeImages.data.memes; // array of memes
-	const randomNumber = Math.floor(Math.random() * memesArray.length); // random number between 1 and 100
-	let url = memesArray[randomNumber].url; // url of the meme at the random position
+	const [allMeme, setAllMeme] = useState([]);
 
 	function getMemeImg() {
-		setMeme((prevState) => ({
-			...prevState,
+		const randomNumber = Math.floor(Math.random() * allMeme.length); // random number between 1 and 100
+		let url = allMeme[randomNumber].url; // url of the meme at the random position
+		setMeme((prevMeme) => ({
+			...prevMeme,
 			randomImage: url,
 		}));
 	}
 
 	function handleChange(event) {
 		const { name, value } = event.target;
-		setMeme((prevState) => ({
-			...prevState,
+		setMeme((prevMeme) => ({
+			...prevMeme,
 			[name]: value,
 		}));
 	}
+
+	useEffect(() => {
+		fetch("https://api.imgflip.com/get_memes")
+			.then((res) => res.json())
+			.then((data) => setAllMeme(data.data.memes)); // this changes the state of allMeme.
+	}, []);
 
 	return (
 		<main>
