@@ -11,6 +11,12 @@ const Meme = () => {
 
 	const [allMeme, setAllMeme] = useState([]);
 
+	useEffect(() => {
+		fetch("https://api.imgflip.com/get_memes")
+			.then((res) => res.json())
+			.then((data) => setAllMeme(data.data.memes)); // this changes the state of allMeme.
+	}, []);
+
 	function getMemeImg() {
 		const randomNumber = Math.floor(Math.random() * allMeme.length); // random number between 1 and 100
 		let url = allMeme[randomNumber].url; // url of the meme at the random position
@@ -27,12 +33,6 @@ const Meme = () => {
 			[name]: value,
 		}));
 	}
-
-	useEffect(() => {
-		fetch("https://api.imgflip.com/get_memes")
-			.then((res) => res.json())
-			.then((data) => setAllMeme(data.data.memes)); // this changes the state of allMeme.
-	}, []);
 
 	return (
 		<main>
