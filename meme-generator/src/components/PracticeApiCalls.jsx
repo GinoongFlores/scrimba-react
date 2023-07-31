@@ -18,6 +18,7 @@ export default function PracticeApiCalls() {
 					Add
 				</button>
 				<pre>{JSON.stringify(starWarsData, null, 2)}</pre>
+
 			</div>
 		</>
 	);
