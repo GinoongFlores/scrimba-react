@@ -1,5 +1,5 @@
 import "../index.css";
-import Globe from "/img/globe.png";
+import Globe from "../assets/img/globe.png";
 
 const Navbar = () => {
 	return (
