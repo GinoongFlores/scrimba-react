@@ -3,13 +3,15 @@ const Header = () => {
 	return (
 		<>
 			<header>
-				<img
-					src="/img/troll-face.png"
-					alt="troll face"
-					className="header--image"
-				/>
-				<h2 className="header--title">Meme Generator</h2>
-				<h4 className="header--project">React Course - Project 3 </h4>
+				<div className="meme-side">
+					<img
+						src="/img/troll-face.png"
+						alt="troll face"
+						className="troll-face"
+					/>
+					<h2>Meme Generator</h2>
+				</div>
+				<p>React Course - Project 3 </p>
 			</header>
 			<div className="meme">
 				<form>
