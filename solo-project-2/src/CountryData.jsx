@@ -14,7 +14,7 @@ export default [
 	{
 		id: 2,
 		country: "Australia",
-		imgCountry: "japan.jpeg",
+		imgCountry: "australia.jpg",
 		altCountry: "Australia",
 		googleMapsUrl: "#",
 		landmark: "Sydney Opera House",
@@ -26,7 +26,7 @@ export default [
 	{
 		id: 3,
 		country: "Norway",
-		imgCountry: "japan.jpeg",
+		imgCountry: "norway.jpeg",
 		altCountry: "Norway",
 		googleMapsUrl: "#",
 		landmark: "Geirangerfjord",
