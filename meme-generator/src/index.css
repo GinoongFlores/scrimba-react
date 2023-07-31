@@ -61,7 +61,8 @@ form {
 }
 
 .meme button {
-	width: 477px;
+	width: 100%;
+	max-width: 477px;
 	height: 40px;
 	border-radius: 5px;
 	font-size: 1rem;
@@ -75,7 +76,8 @@ form {
 }
 
 form input[type="text"] {
-	width: 230px;
+	width: 100%;
+	max-width: 230px;
 	height: 35px;
 	border-radius: 5px;
 	padding: 10px;
