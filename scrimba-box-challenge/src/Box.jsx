@@ -2,7 +2,6 @@
 import "./index.css";
 
 export default function Box(props) {
-	// receiving props from the App component
 	const styles = {
 		backgroundColor: props.on ? "#222222" : "transparent",
 	};
@@ -11,8 +10,7 @@ export default function Box(props) {
 		<div
 			style={styles}
 			className="box"
-			// calling the toggle function from the App component
-			onClick={props.handleClick}
+			onClick={() => props.handleClick(props.id)}
 		></div>
 	);
 }
