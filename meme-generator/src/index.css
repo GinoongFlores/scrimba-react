@@ -17,10 +17,6 @@ body {
 	font-family: inherit;
 }
 
-main {
-	padding: 36px;
-}
-
 /* header */
 header {
 	display: flex;
@@ -50,29 +46,39 @@ header {
 }
 
 /* form */
-
-.form {
-	display: grid;
-	/* 2 rows / 2 columns by 1 fraction */
-	grid-template: 40px 40px / 1fr 1fr;
-	gap: 17px;
+.meme {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2rem;
+	padding: 1rem;
 }
 
-.form--button {
-	/* grid start on row 1 and ends on row -1 */
-	grid-column: 1 / -1;
+form {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.meme button {
+	width: 477px;
+	height: 40px;
 	border-radius: 5px;
 	font-size: 1rem;
 
+	font-weight: bold;
 	color: white;
 	background-image: var(--bd);
 	border: none;
 	cursor: pointer;
+	align-self: center;
 }
 
-.form--input {
+form input[type="text"] {
+	width: 230px;
+	height: 35px;
 	border-radius: 5px;
-	text-indent: 6px;
+	padding: 10px;
 	border: 1px solid #d5d4d8;
 }
 
