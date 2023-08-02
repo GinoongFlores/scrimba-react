@@ -50,14 +50,17 @@ export default function App() {
 			// else
 			// push the old note to the end of the new array
 			// return the new array
-			const newArray = [];
-			OldNotes.map((note) => {
-				if (note.id === currentNoteId) {
-					newArray.unshift({ ...note, body: text });
-				} else {
-					newArray.push(note);
-				}
-			});
+			if (OldNotes.length > 0) {
+				const newArray = [];
+				OldNotes.map((note) => {
+					if (note.id === currentNoteId) {
+						newArray.unshift({ ...note, body: text });
+					} else {
+						newArray.push(note);
+					}
+				});
+				return newArray;
+			}
 
 			// imperative way of making the recent note at the top of the sidebar
 			// for (let i = 0; i < OldNotes.length; i++) {
@@ -68,8 +71,28 @@ export default function App() {
 			// 		newArray.push(oldNote);
 			// 	}
 			// }
-			return newArray;
 		});
+	}
+
+	/**
+	 * Challenge: complete and implement the deleteNote function
+	 *
+	 * Hints:
+	 * 1. What array method can be used to return a new
+	 *    array that has filtered out an item based
+	 *    on a condition?
+	 * 2. Notice the parameters being based to the function
+	 *    and think about how both of those parameters
+	 *    can be passed in during the onClick event handler
+	 */
+
+	function deleteNote(event, noteId) {
+		event.stopPropagation();
+
+		/* 
+			filter or look into notes array and if the note.id is not equal to the noteId or is not the note that we clicked on which is true, then we want to keep it in the array. If note.id is equal to the noteId or is the note that we clicked on, then we want to remove it from the array.
+		*/
+		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
 	}
 
 	function findCurrentNote() {
@@ -89,6 +112,7 @@ export default function App() {
 						currentNote={findCurrentNote()}
 						setCurrentNoteId={setCurrentNoteId}
 						newNote={createNewNote}
+						deleteNote={deleteNote}
 					/>
 					{currentNoteId && notes.length > 0 && (
 						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
