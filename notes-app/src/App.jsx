@@ -41,15 +41,35 @@ export default function App() {
 	}
 
 	function updateNote(text) {
-		// setNotes
-		// this code not rearrange the notes in the sidebar
-		// setNotes((oldNotes) =>
-		// 	oldNotes.map((oldNote) => {
-		// 		return oldNote.id === currentNoteId
-		// 			? { ...oldNote, body: text }
-		// 			: oldNote;
-		// 	})
-		// );
+		// trying to rearrange the most recently modified note to be at the top of the sidebar
+		setNotes((OldNotes) => {
+			// create a new empty array
+			// Loop over the origin array
+			// if the id matches
+			// put the updated note at the beginning of the new array
+			// else
+			// push the old note to the end of the new array
+			// return the new array
+			const newArray = [];
+			OldNotes.map((note) => {
+				if (note.id === currentNoteId) {
+					newArray.unshift({ ...note, body: text });
+				} else {
+					newArray.push(note);
+				}
+			});
+
+			// imperative way of making the recent note at the top of the sidebar
+			// for (let i = 0; i < OldNotes.length; i++) {
+			// 	const oldNote = OldNotes[i];
+			// 	if (oldNote.id === currentNoteId) {
+			// 		newArray.unshift({ ...oldNote, body: text });
+			// 	} else {
+			// 		newArray.push(oldNote);
+			// 	}
+			// }
+			return newArray;
+		});
 	}
 
 	function findCurrentNote() {
