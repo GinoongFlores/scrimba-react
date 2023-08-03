@@ -28,4 +28,4 @@ In the context of Firestore, a collection is a group of documents that share a c
 
 In the provided code snippet, notesCollection is a reference to a collection of documents in the Firestore database. The collection() method is used to create a reference to the notes collection in the database.
 */
-const notesCollection = collection(db, "notes") 
+export const notesCollection = collection(db, "notes") 
