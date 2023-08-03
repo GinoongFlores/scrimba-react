@@ -1,7 +1,6 @@
 import Editor from "./components/Editor";
 import Sidebar from "./components/Sidebar";
 import { useEffect, useState } from "react";
-import { data } from "./data";
 import Split from "react-split";
 import { nanoid } from "nanoid";
 import "./index.css";
@@ -18,6 +17,10 @@ export default function App() {
 	);
 	const [currentNoteId, setCurrentNoteId] = useState(
 		(notes[0] && notes[0].id) || ""
+	);
+
+	const currentNote = notes.find(
+		(note) => note.id === currentNoteId || notes[0]
 	);
 
 	// sync notes with localStorage
@@ -90,17 +93,9 @@ export default function App() {
 		event.stopPropagation();
 
 		/* 
-			filter or look into notes array and if the note.id is not equal to the noteId or is not the note that we clicked on which is true, then we want to keep it in the array. If note.id is equal to the noteId or is the note that we clicked on, then we want to remove it from the array.
+			filter or look into notes array and if the note.id is not equal to the noteId or is not the note that we clicked on which results to true, then we want to keep it in the array. If note.id is equal to the noteId or is the note that we clicked on, then we want to remove it from the array.
 		*/
 		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
-	}
-
-	function findCurrentNote() {
-		return (
-			notes.find((note) => {
-				return note.id === currentNoteId;
-			}) || notes[0]
-		);
 	}
 
 	return (
@@ -109,13 +104,13 @@ export default function App() {
 				<Split sizes={[30, 70]} direction="horizontal" className="split">
 					<Sidebar
 						notes={notes}
-						currentNote={findCurrentNote()}
+						currentNote={currentNote}
 						setCurrentNoteId={setCurrentNoteId}
 						newNote={createNewNote}
 						deleteNote={deleteNote}
 					/>
 					{currentNoteId && notes.length > 0 && (
-						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
+						<Editor currentNote={currentNote} updateNote={updateNote} />
 					)}
 				</Split>
 			) : (
