@@ -3,7 +3,13 @@ import Sidebar from "./components/Sidebar";
 import { useEffect, useState } from "react";
 import Split from "react-split";
 import { nanoid } from "nanoid";
-import { onSnapshot, addDoc, doc, deleteDoc } from "@firebase/firestore";
+import {
+	onSnapshot,
+	addDoc,
+	doc,
+	deleteDoc,
+	setDoc,
+} from "@firebase/firestore";
 import { notesCollection, db } from "./firebase";
 import "./index.css";
 
@@ -16,7 +22,8 @@ export default function App() {
 	*/
 	const [notes, setNotes] = useState([]);
 
-	const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id) || "";
+	const [currentNoteId, setCurrentNoteId] = useState("");
+	console.log(currentNoteId);
 
 	const currentNote =
 		notes.find((note) => note.id === currentNoteId) || notes[0];
@@ -31,6 +38,12 @@ export default function App() {
 		const newNoteRef = await addDoc(notesCollection, newNote);
 		setCurrentNoteId(newNoteRef.id);
 	}
+
+	useEffect(() => {
+		if (!currentNoteId) {
+			setCurrentNoteId(notes[0]?.id);
+		}
+	}, [currentNoteId, notes]);
 
 	useEffect(() => {
 		// the onSnapshot takes two arguments, the first is the collection reference, and the second is a callback function whenever there's a change to the "notes" collection.
@@ -54,38 +67,10 @@ export default function App() {
 
 	// localStorage.clear();
 
-	function updateNote(text) {
-		// trying to rearrange the most recently modified note to be at the top of the sidebar
-		setNotes((oldNotes) => {
-			// create a new empty array
-			// Loop over the origin array
-			// if the id matches
-			// put the updated note at the beginning of the new array
-			// else
-			// push the old note to the end of the new array
-			// return the new array
-			if (oldNotes.length > 0) {
-				const newArray = [];
-				oldNotes.map((note) => {
-					if (note.id === currentNoteId) {
-						newArray.unshift({ ...note, body: text });
-					} else {
-						newArray.push(note);
-					}
-				});
-				return newArray;
-			}
-
-			// imperative way of making the recent note at the top of the sidebar
-			// for (let i = 0; i < oldNotes.length; i++) {
-			// 	const oldNote = oldNotes[i];
-			// 	if (oldNote.id === currentNoteId) {
-			// 		newArray.unshift({ ...oldNote, body: text });
-			// 	} else {
-			// 		newArray.push(oldNote);
-			// 	}
-			// }
-		});
+	async function updateNote(text) {
+		const docRef = doc(db, "notes", currentNoteId);
+		// since we only have one property we can make an inline object and merge it with the existing data object. The merge property will lessen the risk of overwriting the existing data object in the future when we add more properties to the data object.
+		await setDoc(docRef, { body: text }, { merge: true });
 	}
 
 	/**
