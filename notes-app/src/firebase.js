@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // getFirestore() is a function that gets a reference to the firestore database
-const db = getFirestore(app)
+export const db = getFirestore(app)
 
 /* 
 
