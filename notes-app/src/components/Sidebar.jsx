@@ -16,7 +16,7 @@ export default function Sidebar(props) {
 					pass the event object from the callback to the deleteNote function.
 					So that event.stopPropagation() from the deleteNote function can be called.
 					*/
-					onClick={(event) => props.deleteNote(event, note.id)}
+					onClick={() => props.deleteNote(note.id)}
 				>
 					<i className="gg-trash trash-icon"></i>
 				</button>
