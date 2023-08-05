@@ -14,22 +14,22 @@ import { notesCollection, db } from "./firebase";
 import "./index.css";
 
 export default function App() {
-	// initialize state with the notes from localStorage if they exists, OR an empty array if it's falsy.
-
-	/* 
-		this is an example of a "lazy initializer" because we passed a function to useState
-		only when state is first accessed, and not when the component is first rendered.
-	*/
 	const [notes, setNotes] = useState([]);
 
 	const [currentNoteId, setCurrentNoteId] = useState("");
-	console.log(currentNoteId);
 
 	const currentNote =
 		notes.find((note) => note.id === currentNoteId) || notes[0];
 
+	const sortedNotes =
+		[...notes.sort((a, b) => b.updatedAt - a.updatedAt)] && currentNote;
+
+	// create a new note and add it to the database.
 	async function createNewNote() {
 		const newNote = {
+			createdAt: Date.now(),
+			updatedAt: Date.now(),
+
 			body: "# Type your markdown note's title here",
 		};
 		// add the newNote to the database by calling the addDoc function with two arguments, the first is the collection reference, and the second is the data object that we want to add to the collection.
@@ -50,10 +50,11 @@ export default function App() {
 
 		// the snapshot holds the data of the collection whenever the collection is updated or changed. The onSnapshot() listener creates a websocket connection to the database to receive the data in real time. And we don't want to hang the listener when the component unmounts or whenever the tab close which causes memory leak when there's a listener listening in the background. So we need to return a function from the useEffect hook to clean up the listener.
 		const unsubscribe = onSnapshot(notesCollection, (snapshot) => {
-			// Sync up local notes array with the snapshot data
+			// Sync up local notes array with the snapshot data by listening to the changes in the database.
 			const noteArr = snapshot.docs.map((doc) => ({
 				// return all the data object from the document.
 				...doc.data(),
+
 				// firestore doesn't store the id in the data object, the document has its own id property. So we need to add the id property to the data object.
 				id: doc.id,
 			}));
@@ -70,20 +71,13 @@ export default function App() {
 	async function updateNote(text) {
 		const docRef = doc(db, "notes", currentNoteId);
 		// since we only have one property we can make an inline object and merge it with the existing data object. The merge property will lessen the risk of overwriting the existing data object in the future when we add more properties to the data object.
-		await setDoc(docRef, { body: text }, { merge: true });
-	}
+		await setDoc(
+			docRef,
+			{ body: text, updatedAt: Date.now() },
 
-	/**
-	 * Challenge: complete and implement the deleteNote function
-	 *
-	 * Hints:
-	 * 1. What array method can be used to return a new
-	 *    array that has filtered out an item based
-	 *    on a condition?
-	 * 2. Notice the parameters being based to the function
-	 *    and think about how both of those parameters
-	 *    can be passed in during the onClick event handler
-	 */
+			{ merge: true }
+		);
+	}
 
 	// the doc() helps us to access a single document in the collection. The doc() takes two arguments, the first is the collection reference, and the second is the name of the collection that were trying to delete from the database. And the third argument is the id of the document that we want to delete.
 	async function deleteNote(noteId) {
@@ -97,7 +91,7 @@ export default function App() {
 				<Split sizes={[30, 70]} direction="horizontal" className="split">
 					<Sidebar
 						notes={notes}
-						currentNote={currentNote}
+						currentNote={sortedNotes}
 						setCurrentNoteId={setCurrentNoteId}
 						newNote={createNewNote}
 						deleteNote={deleteNote}
