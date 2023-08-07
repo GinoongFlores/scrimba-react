@@ -21,8 +21,11 @@ export default function App() {
 	const currentNote =
 		notes.find((note) => note.id === currentNoteId) || notes[0];
 
-	const sortedNotes =
-		[...notes.sort((a, b) => b.updatedAt - a.updatedAt)] && currentNote;
+	// sort the notes array by the updatedAt property in descending order.
+	const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt);
+
+	// the tempNoteText is the text that we type in the editor.
+	const [tempNoteText, setTempNoteText] = useState("");
 
 	// create a new note and add it to the database.
 	async function createNewNote() {
@@ -40,10 +43,33 @@ export default function App() {
 	}
 
 	useEffect(() => {
+		currentNote && setTempNoteText(currentNote.body);
+	}, [currentNote]);
+
+	useEffect(() => {
 		if (!currentNoteId) {
 			setCurrentNoteId(notes[0]?.id);
 		}
-	}, [currentNoteId, notes]);
+	}, [notes, currentNoteId]);
+
+	/* 
+	 - Create an effect that runs any time the `tempNoteText` changes
+	 - Delay the sending of the request to firebase by 500s 
+	 - uses setTimeout 
+	 - use clear clearTimeout to cancel the previous setTimeout
+	*/
+
+	useEffect(() => {
+		// the `setTimeout` function will execute after 500ms and call the `updateNote` function with the `tempNoteText` as the argument.
+		const timeoutId = setTimeout(() => {
+			if (tempNoteText !== currentNote.body) {
+				updateNote(tempNoteText);
+			}
+		}, 500);
+
+		// use clearTimeout() and call the timeoutId to cancel the previous setTimeout.
+		return () => clearTimeout(timeoutId);
+	}, [tempNoteText]); // useEffect will run every time the tempNoteText changes or on every key stroke.
 
 	useEffect(() => {
 		// the onSnapshot takes two arguments, the first is the collection reference, and the second is a callback function whenever there's a change to the "notes" collection.
@@ -65,8 +91,6 @@ export default function App() {
 		// return a function to clean up the listener. Because the unsubscribe is a function we can call it directly without creating a new function.
 		return unsubscribe;
 	}, []);
-
-	// localStorage.clear();
 
 	async function updateNote(text) {
 		const docRef = doc(db, "notes", currentNoteId);
@@ -90,14 +114,17 @@ export default function App() {
 			{notes.length > 0 ? (
 				<Split sizes={[30, 70]} direction="horizontal" className="split">
 					<Sidebar
-						notes={notes}
-						currentNote={sortedNotes}
+						notes={sortedNotes}
+						currentNote={currentNote}
 						setCurrentNoteId={setCurrentNoteId}
 						newNote={createNewNote}
 						deleteNote={deleteNote}
 					/>
 
-					<Editor currentNote={currentNote} updateNote={updateNote} />
+					<Editor
+						tempNoteText={tempNoteText}
+						setTempNoteText={setTempNoteText}
+					/>
 				</Split>
 			) : (
 				<div className="no-notes">
